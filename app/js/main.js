@@ -76,5 +76,32 @@ $(function () {
             progress.setAttribute('stroke-dasharray', circleLength);
             progress.setAttribute('stroke-dashoffset', circleLength - circleLength * perecentageProgress / 100);
         }
-    })
+    });
+
+    const portfolioTabsNavBtn = document.querySelectorAll('.portfolio-tabs-nav__btn');
+
+    portfolioTabsNavBtn.forEach(item => item.addEventListener('click', changePortfolioTabsNav))
+
+
+
+    function changePortfolioTabsNav() {
+        const path = this.getAttribute('data-path');
+
+        document.querySelectorAll('.portfolio-tabs-nav__btn').forEach(item => item.classList.remove('portfolio-tabs-nav__btn--active'));
+        document.querySelectorAll('.portfolio-tabs__item').forEach(item => item.style.display = 'none');
+
+        this.classList.add('portfolio-tabs-nav__btn--active')
+        document.querySelectorAll(`[data-target="${path}"]`).forEach(item => {
+            item.style.display = 'block';
+        });
+
+        if (path === 'all') {
+            document.querySelectorAll('.portfolio-tabs__item').forEach(item => {
+                item.style.display = 'block';
+            });
+        }
+
+    }
+
+
 })

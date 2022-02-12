@@ -16,14 +16,14 @@ class GraphAccordion {
 
     start() {
         if (this.accordion) {
-            if (this.accordion.classList.contains('is-open')) {
-                this.open();
-            }
+          if (this.accordion.classList.contains('is-open')) {
+            this.open();
+          }
         }
-    }
+      }
+    
 
     event() {
-        console.log('event!');
 
         if (this.accordion) {
             this.accordion.addEventListener('click', (e) => {
