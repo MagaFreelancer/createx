@@ -78,29 +78,48 @@ $(function () {
         }
     });
 
+
+
     const portfolioTabsNavBtn = document.querySelectorAll('.portfolio-tabs-nav__btn');
-
-    portfolioTabsNavBtn.forEach(item => item.addEventListener('click', changePortfolioTabsNav))
-
-
+    const portfolioTabsItems = document.querySelectorAll('.portfolio-tabs__item');
+    portfolioTabsNavBtn.forEach(item => item.addEventListener('click', changePortfolioTabsNav));
 
     function changePortfolioTabsNav() {
         const path = this.getAttribute('data-path');
 
-        document.querySelectorAll('.portfolio-tabs-nav__btn').forEach(item => item.classList.remove('portfolio-tabs-nav__btn--active'));
-        document.querySelectorAll('.portfolio-tabs__item').forEach(item => item.style.display = 'none');
+        portfolioTabsNavBtn.forEach(item => item.classList.remove('portfolio-tabs-nav__btn--active'));
+        portfolioTabsItems.forEach(item => item.style.display = 'none');
 
-        this.classList.add('portfolio-tabs-nav__btn--active')
+        this.classList.add('portfolio-tabs-nav__btn--active');
         document.querySelectorAll(`[data-target="${path}"]`).forEach(item => {
             item.style.display = 'block';
         });
 
         if (path === 'all') {
-            document.querySelectorAll('.portfolio-tabs__item').forEach(item => {
+            portfolioTabsItems.forEach(item => {
                 item.style.display = 'block';
             });
         }
 
+    }
+    const workImages = document.querySelector('.work-images-nav');
+    if (workImages) {
+        const workSlider = new Swiper(workImages, {
+            spaceBetween: 20,
+            slidesPerView: 10,
+            freeMode: true,
+            watchSlidesProgress: true,
+        });
+        const workSliderNav = new Swiper(".work-images-slider", {
+            spaceBetween: 10,
+            navigation: {
+                nextEl: ".work-images__next",
+                prevEl: ".work-images__prev",
+            },
+            thumbs: {
+                swiper: workSlider,
+            },
+        });
     }
 
 
