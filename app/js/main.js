@@ -29,6 +29,36 @@ $(function () {
             prevEl: '.testimonials__prev',
         },
     });
+    const historySlider = new Swiper('.history-slider', {
+        slidesPerView: 1,
+        spaceBetween: gap,
+        navigation: {
+            nextEl: '.history__next',
+            prevEl: '.history__prev',
+        },
+    });
+    const historyBtns = document.querySelectorAll('.history-nav__btn');
+
+    historySlider.on('slideChange', function () {
+        historyBtns.forEach((el, idx) => {
+            el.classList.remove('history-nav__btn--active')
+        });
+        historyBtns[historySlider.realIndex].classList.add('history-nav__btn--active')
+   
+    });
+
+    historyBtns.forEach((el, idx) => {
+
+        el.setAttribute('data-index', idx)
+        el.addEventListener('click', e => {
+            const index = e.currentTarget.getAttribute('data-index');
+            historyBtns.forEach((el, idx) => {
+                el.classList.remove('history-nav__btn--active')
+            });
+            e.currentTarget.classList.add('history-nav__btn--active')
+            historySlider.slideTo(index)
+        })
+    })
 
 
     // const circleOne = document.querySelector('.facts-element__circle--one-color .progress');
